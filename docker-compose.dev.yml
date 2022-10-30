@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  next-app:
+    platform: linux/x86_64
+    container_name: next-app
+    image: localdev/docker-next-app
+    build:
+      context: .
+      dockerfile: ./dev/Dockerfile
+    volumes:
+      - ./frontVolume:/src
+      - /src/node_modules # パス指定のみで、Engineにボリュームを生成させる
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - "3000:3000"
+    tty: true
+    working_dir: /src
+    command: sh -c "npm rebuild esbuild && npm run dev"

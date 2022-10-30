@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  next-app:
+    platform: linux/x86_64
+    container_name: next-app
+    image: prod/docker-next-app
+    build: .
+    ports:
+      - "80:80"
+    tty: true
+    command: sh -c "npm start"
